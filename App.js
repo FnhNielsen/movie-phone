@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { getMovies } from "./API/MovieApi";
+import MovieCard from "./MovieCard.js";
+
 
 export default function App() {
   const [movies, setMovies] = useState([])
