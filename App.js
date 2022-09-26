@@ -1,45 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { getMovies } from "./API/MovieApi";
-import MovieCard from "./MovieCard.js";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import 'react-native-gesture-handler';
+import Home from './components/Home.js'
+import MovieInfo from "./components/MovieInfo";
 
-
+const StackNav = createNativeStackNavigator();
 export default function App() {
-  const [movies, setMovies] = useState([])
-  const [filterMovies, setFilterMovies] = useState([""])
-
-  const fetchApi = async() =>{
-    setMovies(await getMovies(filterMovies))
-    setFilterMovies("")
-  }
-
-  useEffect(() => {
-    fetchApi();
-  }, []);
-
   return (
-    <>
-      {Object.keys(movies).length > 0 && (
-        <View>
-          <StatusBar barStyle="light-content" />
-          <TextInput placeholder="find movie..." value={filterMovies} onChangeText={(text) => setFilterMovies(text)} left={<TextInput.Icon name="magnify" />} onSubmitEditing={fetchApi}/>
-          <ScrollView>
-            {movies.Search.map((movie, i) => (
-              <MovieCard movie={movie} key={i} />
-            ))}
-          </ScrollView>
-        </View>
-      )}
-    </>
+    <NavigationContainer>
+      <StackNav.Navigator>
+        <StackNav.Screen name="Home" component={Home}/>
+        <StackNav.Screen name="Info" component={MovieInfo}/>
+      </StackNav.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
