@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';
-import { FlatList, StyleSheet, Text, View , ScrollView} from 'react-native';
+import { StyleSheet, View , ScrollView} from 'react-native';
 import { TextInput } from "react-native-paper";
 import { getAllMovies } from 'movie-app/MovieApi.js'
 import Data from './Data.js';
